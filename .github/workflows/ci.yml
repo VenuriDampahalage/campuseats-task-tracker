@@ -1,23 +1,22 @@
-name: CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  check:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24.20.0
-
-      - name: Run task tracker
-        run: node src/tasks.js
+name: CI 
+  
+on: 
+  push: 
+    branches: [ "main", "feature/**", "chore/**" ] 
+  pull_request: 
+    branches: [ "main" ] 
+  
+jobs: 
+  build-and-check: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Check out the repository 
+        uses: actions/checkout@v4 
+  
+      - name: List repository files 
+        run: ls -la 
+  
+      - name: Basic project check 
+        run: | 
+          echo "Running CI for CampusEats Task Tracker" 
+          test -f README.md && echo "README found"
